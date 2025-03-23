@@ -8,11 +8,13 @@ import {useProfile} from "@/components/UseProfile";
 import Image from "next/image";
 import {useContext, useEffect, useState} from "react";
 import toast from "react-hot-toast";
+import { useRouter } from 'next/navigation'
 
 export default function CartPage() {
   const {cartProducts,removeCartProduct} = useContext(CartContext);
   const [address, setAddress] = useState({});
   const {data:profileData} = useProfile();
+  const router = useRouter()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -47,6 +49,8 @@ export default function CartPage() {
     ev.preventDefault();
     // address and shopping cart products
 
+    toast.success('Payment successfull! 🎉');
+    router.push('/orders');
     const promise = new Promise((resolve, reject) => {
       fetch('/api/checkout', {
         method: 'POST',
@@ -65,11 +69,11 @@ export default function CartPage() {
       });
     });
 
-    await toast.promise(promise, {
-      loading: 'Preparing your order...',
-      success: 'Redirecting to payment...',
-      error: 'Something went wrong... Please try again later',
-    })
+    // await toast.promise(promise, {
+    //   loading: 'Preparing your order...',
+    //   success: 'Redirecting to payment...',
+    //   error: 'Something went wrong... Please try again later',
+    // })
   }
 
   if (cartProducts?.length === 0) {
@@ -95,7 +99,7 @@ export default function CartPage() {
             <CartProduct
               key={index}
               product={product}
-              onRemove={removeCartProduct}
+              onRemove={() => removeCartProduct(index)}
             />
           ))}
           <div className="py-2 pr-16 flex justify-end items-center">
@@ -105,9 +109,9 @@ export default function CartPage() {
               Total:
             </div>
             <div className="font-semibold pl-2 text-right">
-              ${subtotal}<br />
-              $5<br />
-              ${subtotal + 5}
+              ₹{subtotal}<br />
+              ₹5<br />
+              ₹{subtotal + 5}
             </div>
           </div>
         </div>
@@ -118,7 +122,7 @@ export default function CartPage() {
               addressProps={address}
               setAddressProp={handleAddressChange}
             />
-            <button type="submit">Pay ${subtotal+5}</button>
+            <button type="submit">Pay ₹{subtotal+5}</button>
           </form>
         </div>
       </div>

@@ -1,7 +1,10 @@
+'use client';
 import Right from "@/components/icons/Right";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
+  const router = useRouter();
   return (
     <section className="hero md:mt-4">
       <div className="py-8 md:py-12">
@@ -17,18 +20,18 @@ export default function Hero() {
           Pizza is the missing piece that makes every day complete, a simple yet delicious joy in life
         </p>
         <div className="flex gap-4 text-sm">
-          <button className="flex justify-center bg-primary uppercase flex items-center gap-2 text-white px-4 py-2 rounded-full">
+          <button className="flex justify-center bg-primary uppercase flex items-center gap-2 text-white px-4 py-2 rounded-full" onClick={() => router.push('/menu')}>
             Order now
             <Right />
           </button>
-          <button className="flex items-center border-0 gap-2 py-2 text-gray-600 font-semibold">
+          <button className="flex items-center border-0 gap-2 py-2 text-gray-600 font-semibold" onClick={() => router.push('/#about')}>
             Learn more
             <Right />
           </button>
         </div>
       </div>
       <div className="relative hidden md:block">
-        <Image src={'/pizza.png'} layout={'fill'} objectFit={'contain'} alt={'pizza'} />
+        <Image src={'/pizzalogo.jpg'} layout={'fill'} objectFit={'contain'} alt={'pizza'} />
       </div>
     </section>
   );

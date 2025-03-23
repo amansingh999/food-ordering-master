@@ -11,10 +11,11 @@ export default function EditableImage({link, setLink}) {
       const uploadPromise = fetch('/api/upload', {
         method: 'POST',
         body: data,
-      }).then(async response => {
+      }).then(response => {
         if (response.ok) {
-          const link = await response.json();
-          setLink(link);
+          return response.json().then(link => {
+            setLink(link);
+          })
         }
         throw new Error('Something went wrong');
       });
