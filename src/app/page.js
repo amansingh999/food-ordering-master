@@ -29,7 +29,7 @@ export default function Home() {
               with a simple dream: to create the perfect fusion of authentic
               Italian flavors with the bold and spicy Indian swag that we all
               love. We believe pizza isn’t just food; it’s an emotion—whether
-              you're celebrating, chilling with friends, or simply indulging in
+              you&apos;re celebrating, chilling with friends, or simply indulging in
               a well-deserved treat.
             </p>
             <h3 className='mt-4 text-lg font-semibold text-gray-900'>
@@ -63,7 +63,7 @@ export default function Home() {
               <p className='mt-2 text-sm md:text-base'>
                 We are a passionate team of pizza lovers, food enthusiasts, and
                 flavor innovators dedicated to serving the most delicious, bold,
-                and unforgettable pizzas. Whether you're a fan of cheesy
+                and unforgettable pizzas. Whether you&apos;re a fan of cheesy
                 classics, crave a touch of Indian fusion, or love to experiment
                 with new flavors, we’ve got something for every pizza lover.
               </p>
@@ -77,7 +77,7 @@ export default function Home() {
                 <li>✔ Fast, fresh, and fire-grilled to perfection</li>
               </ul>
               <p className='mt-4 text-sm md:text-base font-semibold'>
-                So, next time you're hungry for something legendary, just
+                So, next time you&apos;re hungry for something legendary, just
                 remember:
                 <strong> Pizza Singh – Swag me, King! </strong>
               </p>
