@@ -85,7 +85,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <QualityAssured />
+      {/* <QualityAssured /> */}
       <section className='text-center my-8' id='contact'>
         <SectionHeaders
           subHeader={"Don't hesitate"}
