@@ -9,12 +9,15 @@ import Image from "next/image";
 import {useContext, useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import { useRouter } from 'next/navigation'
+import {useSession} from "next-auth/react";
 
 export default function CartPage() {
   const {cartProducts,removeCartProduct} = useContext(CartContext);
   const [address, setAddress] = useState({});
   const {data:profileData} = useProfile();
   const router = useRouter()
+  const session = useSession();
+  const {status} = session;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -48,7 +51,10 @@ export default function CartPage() {
   async function proceedToCheckout(ev) {
     ev.preventDefault();
     // address and shopping cart products
-
+    if (status === 'unauthenticated') {
+      toast.error('Please login to continue...');
+      return;
+    }
     toast.success('Payment successfull! 🎉');
     router.push('/orders');
     const promise = new Promise((resolve, reject) => {
