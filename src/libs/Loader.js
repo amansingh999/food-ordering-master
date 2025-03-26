@@ -9,6 +9,7 @@ export default function PizzaLoader() {
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
         className="text-yellow-500 text-6xl"
+        style={{ fontSize: '60px' }}
       >
         <FontAwesomeIcon icon={faPizzaSlice} />
       </motion.div>
