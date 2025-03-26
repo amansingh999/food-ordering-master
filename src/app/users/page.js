@@ -1,4 +1,5 @@
 'use client';
+import Notadmin from "@/components/layout/NotAdmin";
 import UserTabs from "@/components/layout/UserTabs";
 import {useProfile} from "@/components/UseProfile";
 import Link from "next/link";
@@ -22,7 +23,7 @@ export default function UsersPage() {
   }
 
   if (!data.admin) {
-    return 'Not an admin';
+    return <Notadmin />;
   }
 
   return (

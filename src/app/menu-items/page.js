@@ -1,5 +1,6 @@
 'use client';
 import Right from "@/components/icons/Right";
+import Notadmin from "@/components/layout/NotAdmin";
 import UserTabs from "@/components/layout/UserTabs";
 import {useProfile} from "@/components/UseProfile";
 import Image from "next/image";
@@ -24,7 +25,7 @@ export default function MenuItemsPage() {
   }
 
   if (!data.admin) {
-    return 'Not an admin.';
+    return <Notadmin />;
   }
 
   return (

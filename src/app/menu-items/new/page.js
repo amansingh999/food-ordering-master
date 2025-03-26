@@ -3,6 +3,7 @@ import Left from "@/components/icons/Left";
 import Right from "@/components/icons/Right";
 import EditableImage from "@/components/layout/EditableImage";
 import MenuItemForm from "@/components/layout/MenuItemForm";
+import Notadmin from "@/components/layout/NotAdmin";
 import UserTabs from "@/components/layout/UserTabs";
 import {useProfile} from "@/components/UseProfile";
 import Link from "next/link";
@@ -47,7 +48,7 @@ export default function NewMenuItemPage() {
   }
 
   if (!data.admin) {
-    return 'Not an admin.';
+    return <Notadmin />;
   }
 
   return (

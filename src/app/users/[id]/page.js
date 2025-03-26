@@ -1,4 +1,5 @@
 'use client';
+import Notadmin from "@/components/layout/NotAdmin";
 import UserForm from "@/components/layout/UserForm";
 import UserTabs from "@/components/layout/UserTabs";
 import {useProfile} from "@/components/UseProfile";
@@ -45,7 +46,7 @@ export default function EditUserPage() {
   }
 
   if (!data.admin) {
-    return 'Not an admin';
+    return <Notadmin />;
   }
 
   return (

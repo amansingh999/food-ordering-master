@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useProfile } from '@/components/UseProfile';
 import toast from 'react-hot-toast';
 import PizzaLoader from '@/libs/Loader';
+import Notadmin from '@/components/layout/NotAdmin';
 
 export default function CategoriesPage() {
   const [categoryName, setCategoryName] = useState('');
@@ -80,7 +81,7 @@ export default function CategoriesPage() {
   }
 
   if (!profileData.admin) {
-    return 'Not an admin';
+    return <Notadmin />;
   }
 
   return (
