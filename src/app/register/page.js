@@ -13,6 +13,7 @@ export default function RegisterPage() {
   const [userCreated, setUserCreated] = useState(false);
   const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState('');
   async function handleFormSubmit(ev) {
     ev.preventDefault();
     setCreatingUser(true);
@@ -20,7 +21,7 @@ export default function RegisterPage() {
     setUserCreated(false);
     const response = await fetch('/api/register', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, name }),
       headers: { 'Content-Type': 'application/json' },
     });
     if (response.ok) {
@@ -52,8 +53,15 @@ export default function RegisterPage() {
       )}
       <form className='block max-w-xs mx-auto' onSubmit={handleFormSubmit}>
         <input
+          type='text'
+          placeholder='Name'
+          value={name}
+          disabled={creatingUser}
+          onChange={(ev) => setName(ev.target.value)}
+        />
+        <input
           type='email'
-          placeholder='email'
+          placeholder='Email'
           value={email}
           disabled={creatingUser}
           onChange={(ev) => setEmail(ev.target.value)}
@@ -61,7 +69,7 @@ export default function RegisterPage() {
         <div className='relative mt-3'>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder='password'
+            placeholder='Password'
             value={password}
             disabled={creatingUser}
             onChange={(ev) => setPassword(ev.target.value)}

@@ -32,6 +32,11 @@ export default function OrdersPage() {
         {loadingOrders && (
           <div>Loading orders...</div>
         )}
+        {!loadingOrders && orders.length === 0 && (
+          <div className="text-center text-gray-500 mt-4">
+            No orders found. 🛒
+          </div>
+        )}
         {orders?.length > 0 && orders.map(order => (
           <div
             key={order._id}
