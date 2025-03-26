@@ -24,14 +24,12 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        debugger
         const email = credentials?.email;
         const password = credentials?.password;
 
         mongoose.connect(process.env.MONGO_URL);
         const user = await User.findOne({email});
         const passwordOk = user && bcrypt.compareSync(password, user.password);
-        debugger
         if (passwordOk) {
           return user;
         }
@@ -40,6 +38,28 @@ export const authOptions = {
       }
     })
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id;
+        session.user.email = token.email;
+      }
+      return session;
+    },
+  },
+  pages: {
+    signIn: '/login',
+  },
+  session: {
+    strategy: 'jwt',
+  },
 };
 
 export async function isAdmin() {

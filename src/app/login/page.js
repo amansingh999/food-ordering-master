@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import PizzaLoader from '@/libs/Loader';
+import toast from 'react-hot-toast';
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -12,13 +14,24 @@ export default function LoginPage() {
   const [loginInProgress, setLoginInProgress] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handleFormSubmit(ev) {
     ev.preventDefault();
     setLoginInProgress(true);
     setLoading(true);
-    await signIn('credentials', { email, password, callbackUrl: '/' });
-
+    const result = await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    });
+    
+    if (result?.ok) {
+      toast.success("Login successful! 🎉");
+      router.push("/");
+    } else {
+      toast.error("Login failed. Please check your email and password.");
+    }
     setLoginInProgress(false);
     setLoading(false);
   }
